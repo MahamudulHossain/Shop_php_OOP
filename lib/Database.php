@@ -1,4 +1,6 @@
 <?php
+include '../config/config.php';
+
 Class Database{
  public $host   = DB_HOST;
  public $user   = DB_USER;
