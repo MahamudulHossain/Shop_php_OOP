@@ -1,5 +1,15 @@
 ﻿<?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
+<?php
+    include '../classes/Category.php';
+
+    $catObj = new Category();
+    if(isset($_GET['catDel']) && $_GET['catDel'] > 0){
+    	$id = $_GET['catDel'];
+    	$catRes = $catObj->catDel($id);
+    }
+    
+?>    
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>Category List</h2>
@@ -12,47 +22,30 @@
 							<th>Action</th>
 						</tr>
 					</thead>
+					<?php 
+                	if(isset($catRes)){
+                		echo $catRes;
+                	}
+                ?>
 					<tbody>
+						<?php 
+							$catData = $catObj->cateAll();
+							if($catData){
+								$i=1;
+								while($row = $catData->fetch_assoc()){
+
+						?>
 						<tr class="odd gradeX">
-							<td>01</td>
-							<td>Internet</td>
-							<td><a href="">Edit</a> || <a href="">Delete</a></td>
+							<td><?php echo $i++;?></td>
+							<td><?php echo $row['catName'];?></td>
+							<td><a href="catedit.php?catEid=<?php echo $row['catId'];?>">Edit</a> || <a onclick="return confirm('Are you sure?');" href="?catDel=<?php echo $row['catId'];?>">Delete</a></td>
 						</tr>
-						<tr class="even gradeC">
-							<td>02</td>
-							<td>Explorer </td>
-							<td><a href="">Edit</a> || <a href="">Delete</a></td>
-						</tr>
-						<tr class="odd gradeX">
-							<td>03</td>
-							<td>Internet</td>
-							<td><a href="">Edit</a> || <a href="">Delete</a></td>
-						</tr>
-						<tr class="even gradeC">
-							<td>04</td>
-							<td>Explorer </td>
-							<td><a href="">Edit</a> || <a href="">Delete</a></td>
-						</tr>
-							<tr class="odd gradeX">
-							<td>05</td>
-							<td>Internet</td>
-							<td><a href="">Edit</a> || <a href="">Delete</a></td>
-						</tr>
-						<tr class="even gradeC">
-							<td>06</td>
-							<td>Explorer </td>
-							<td><a href="">Edit</a> || <a href="">Delete</a></td>
-						</tr>
-						<tr class="odd gradeX">
-							<td>07</td>
-							<td>Internet</td>
-							<td><a href="">Edit</a> || <a href="">Delete</a></td>
-						</tr>
-						<tr class="even gradeC">
-							<td>08</td>
-							<td>Explorer </td>
-							<td><a href="">Edit</a> || <a href="">Delete</a></td>
-						</tr>
+						<?php
+								}
+							}else{
+								echo "No Category Found.";
+							}
+						?>
 					</tbody>
 				</table>
                </div>
