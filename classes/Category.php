@@ -41,7 +41,7 @@
 			return $result;
 		}
 
-		public function upadteCat($cateNameUpdate,$id){
+		public function updateCat($cateNameUpdate,$id){
 			$cateNameUpdate = $this->fm->validation($cateNameUpdate);
 			$id = $this->fm->validation($id);
 			$cateNameUpdate = mysqli_real_escape_string($this->db->link,$cateNameUpdate);

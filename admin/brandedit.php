@@ -1,41 +1,41 @@
 <?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
 <?php
-    include '../classes/Category.php';
+    include '../classes/Brand.php';
 
-    $catObj = new Category();
-    if(!isset($_GET['catEid']) || $_GET['catEid'] == NULL){
-        header('Location:catlist.php');
+    $brandObj = new Brand();
+    if(!isset($_GET['brandEid']) || $_GET['brandEid'] == NULL){
+        header('Location:brandlist.php');
     }else{
-        $id = $_GET['catEid'];
-        $catData = $catObj->catFind($id);
+        $id = $_GET['brandEid'];
+        $brandData = $brandObj->brandFind($id);
 
     }
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $cateNameUpdate = $_POST['cateNameUpdate'];
-        $updateCat = $catObj->updateCat($cateNameUpdate,$id);
+        $brandNameUpdate = $_POST['brandNameUpdate'];
+        $updateBrand = $brandObj->updateBrand($brandNameUpdate,$id);
     }
 
 ?>
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>Edit Category</h2>
+                <h2>Edit Brand</h2>
                <div class="block copyblock"> 
                 <?php 
-                    if(isset($updateCat)){
-                        echo $updateCat;
-                        $URL="catlist.php";
+                    if(isset($updateBrand)){
+                        echo $updateBrand;
+                        $URL="brandlist.php";
                         echo "<script>location.href='$URL'</script>";
                     }
-                    if($catData){
-                        while($row = $catData->fetch_assoc()){
+                    if($brandData){
+                        while($row = $brandData->fetch_assoc()){
 
                 ?>
                  <form  method="post" action="">
                     <table class="form">					
                         <tr>
                             <td>
-                                <input type="text" name="cateNameUpdate" value="<?php echo $row['catName']?>" class="medium" required="required" />
+                                <input type="text" name="brandNameUpdate" value="<?php echo $row['brandName']?>" class="medium" required="required" />
                             </td>
                         </tr>
 						<tr> 
