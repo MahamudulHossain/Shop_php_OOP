@@ -1,6 +1,6 @@
 <?php
-	include '../lib/Database.php';
-	include '../helpers/Format.php';
+	include_once '../lib/Database.php';
+	include_once '../helpers/Format.php';
 
 	class Category
 	{
