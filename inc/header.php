@@ -1,3 +1,22 @@
+<?php
+    include 'lib/Database.php';
+    include 'helpers/Format.php';
+    include 'lib/Session.php';
+    include 'classes/FrontProduct.php';
+    Session::init();
+	  header("Cache-Control: no-cache, must-revalidate");
+	  header("Pragma: no-cache"); 
+	  header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
+	  header("Cache-Control: max-age=2592000");
+
+	  //Autoloading all classes 
+		// spl_autoload_register(function($class){
+		// 	include_once "classes/". $class . ".php";
+		// 	});  
+
+
+?>
+
 <!DOCTYPE HTML>
 <head>
 <title>Store Website</title>
