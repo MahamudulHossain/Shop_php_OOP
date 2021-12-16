@@ -1,22 +1,26 @@
-<?php include 'inc/header.php'; ?>
+<?php include 'inc/header.php'; 
+	
+	$pdObj = new FrontProduct();
+    $fmObj = new Format();
+	$cartObj = new CartData();
+
+	if(!isset($_GET['fPdId']) || $_GET['fPdId'] == NULL){
+			        header('Location:404.php');
+    }else{
+        $id = $_GET['fPdId'];
+        $proData = $pdObj->productFind($id);
+    }
+
+	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $quantity = $_POST['quantity'];
+        $addcart = $cartObj->addToCart($quantity,$id);
+    }
+?>
 
  <div class="main">
     <div class="content">
     	<div class="section group">
-    		<?php
-	    	 	$pdObj = new FrontProduct();
-    			$fmObj = new Format();
-
-
-			    if(!isset($_GET['fPdId']) || $_GET['fPdId'] == NULL){
-			        header('Location:404.php');
-			    }else{
-			        $id = $_GET['fPdId'];
-			        $proData = $pdObj->productFind($id);
-			    }
-    		?>
     		<?php 
-
     			if($proData){
     				while($prdRow = $proData->fetch_assoc()){
 
@@ -34,8 +38,8 @@
 							<p>Brand:<span><?php echo $prdRow['brandName']?></span></p>
 						</div>
 						<div class="add-cart">
-							<form action="cart.php" method="post">
-								<input type="number" class="buyfield" name="" value="1"/>
+							<form action="" method="post">
+								<input type="number" class="buyfield" name="quantity" value="1"/>
 								<input type="submit" class="buysubmit" name="submit" value="Buy Now"/>
 							</form>				
 						</div>

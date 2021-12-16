@@ -3,6 +3,7 @@
     include 'helpers/Format.php';
     include 'lib/Session.php';
     include 'classes/FrontProduct.php';
+    include 'classes/CartData.php';
     Session::init();
 	  header("Cache-Control: no-cache, must-revalidate");
 	  header("Pragma: no-cache"); 
@@ -12,8 +13,7 @@
 	  //Autoloading all classes 
 		// spl_autoload_register(function($class){
 		// 	include_once "classes/". $class . ".php";
-		// 	});  
-
+		// 	}); 
 
 ?>
 
