@@ -24,14 +24,22 @@ class CartData
 			$image = $presult['image'];
 			$sId = session_id();
 
-			$query = "INSERT INTO tbl_cart(sId,productId,productName,price,quantity,image) VALUES('$sId','$id','$productName','$price','$quantity','$image')";
-			$inserted_rows = $this->db->insert($query);
+			$cartCheck = "SELECT * FROM tbl_cart WHERE productId = '$id' AND sId = '$sId' ";
+			$checkData = $this->db->select($cartCheck);
+			if($checkData){
+				$msg = "Product already added";
+				return $msg;
+			}else{
+				$query = "INSERT INTO tbl_cart(sId,productId,productName,price,quantity,image) VALUES('$sId','$id','$productName','$price','$quantity','$image')";
+				$inserted_rows = $this->db->insert($query);
 			    if($inserted_rows){
 					header("Location:cart.php");
 				}else{
 					header("Location:404.php");
 					
 				}
+			}
+			
 		}
 
 		public function cartAllData(){
