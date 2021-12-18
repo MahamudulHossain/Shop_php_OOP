@@ -1,11 +1,43 @@
-<?php include 'inc/header.php'; ?>
+<?php 
+	include 'inc/header.php'; 
+?>
 
+<?php
+	$cartObj = new CartData();
+	//Redirecting when cart is empty
+	$sid = session_id();
+	$sessionRes = $cartObj->sessionCheck($sid);
+	if(!$sessionRes){
+		echo "<script>window.location.href = 'index.php'</script>";
+	}
 
+	if(isset($_GET['delCartItem']) && $_GET['delCartItem'] > 0){
+    	$id = $_GET['delCartItem'];
+    	$cartItemRes = $cartObj->cartItemDel($id);
+    }
+	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		$cartId = $_POST['cartId'];
+		$quantity = $_POST['quantity'];
+		if($quantity <= 0){
+			$cartItemRes = $cartObj->cartItemDel($cartId);
+		}else{
+	        $updateItemNumber = $cartObj->updateItemNumber($quantity,$cartId);
+		}
+    }
+?>
  <div class="main">
     <div class="content">
     	<div class="cartoption">		
 			<div class="cartpage">
 			    	<h2>Your Cart</h2>
+			    	<div>
+			    		<?php
+
+			    		if(isset($updateItemNumber)){
+			    			echo $updateItemNumber;
+			    		}
+			    	?>
+			    	</div>
 						<table class="tblone">
 							<tr>
 								<th width="5%">S .No</th>
@@ -33,7 +65,8 @@
 								<td>$ <?php echo $cartRow['price']?></td>
 								<td>
 									<form action="" method="post">
-										<input type="number" name="" value="<?php echo $cartRow['quantity']?>"/>
+										<input type="hidden" name="cartId" value="<?php echo $cartRow['cartId']?>"/>
+										<input type="number" name="quantity" value="<?php echo $cartRow['quantity']?>"/>
 										<input type="submit" name="submit" value="Update"/>
 									</form>
 								</td>
@@ -41,7 +74,7 @@
 									$tp =  $cartRow['quantity']* $cartRow['price'];
 									echo $tp;
 								?></td>
-								<td><a href="">X</a></td>
+								<td><a onclick="return confirm('Are you sure?');" href="?delCartItem=<?php echo $cartRow['cartId']?>">X</a></td>
 							</tr>
 							<?php 
 								$sum+=$tp;
@@ -56,7 +89,7 @@
 							</tr>
 							<tr>
 								<th>VAT : </th>
-								<td> &nbsp;&nbsp;&nbsp; 10% </td>
+								<td> &nbsp;&nbsp; 10% </td>
 							</tr>
 							<tr>
 								<th>Grand Total :</th>

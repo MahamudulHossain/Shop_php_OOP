@@ -48,6 +48,38 @@ class CartData
 			$allData  = $this->db->select($query);
 			return $allData;
 		}
+
+		public function updateItemNumber($quantity,$cartId){
+			$quantity = $this->fm->validation($quantity);
+			$cartId = $this->fm->validation($cartId);
+			$quantity = mysqli_real_escape_string($this->db->link,$quantity);
+			$cartId = mysqli_real_escape_string($this->db->link,$cartId);
+			$query = "UPDATE tbl_cart set quantity = '$quantity' WHERE cartId = '$cartId' ";
+			$result = $this->db->update($query);
+			if($result){
+				$cartMsg = "<span style='color:green; font-size:18px; font-weight:bold;'>Cart Updated Successfully<span>";
+			}else{
+				$cartMsg = "<span style='color:red; font-size:18px; font-weight:bold;'>Opps! Something went wrong<span>";
+			}
+			return $cartMsg;
+		}
+
+		public function cartItemDel($id){
+			$id = $this->fm->validation($id);
+			$id = mysqli_real_escape_string($this->db->link,$id);
+			$query = "DELETE FROM tbl_cart WHERE cartId = '$id' ";
+			$result = $this->db->delete($query);
+			if($result){
+				echo "<script>window.location.href='cart.php'</script>";
+			}
+			
+		}
+
+		public function sessionCheck($sid){
+			$session_id_query = "SELECT sId FROM tbl_cart WHERE sId = '$sid' ";
+			$checkRes  = $this->db->select($session_id_query);
+			return $checkRes;
+		}
 }
 
 ?>
