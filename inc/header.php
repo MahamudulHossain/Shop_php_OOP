@@ -53,9 +53,19 @@
 			    </div>
 			    <div class="shopping_cart">
 					<div class="cart">
-						<a href="#" title="View my shopping cart" rel="nofollow">
+						<a href="cart.php" title="View my shopping cart" rel="nofollow">
 								<span class="cart_title">Cart</span>
-								<span class="no_product">(empty)</span>
+								<span class="no_product">
+									<?php
+									$cartDataObj = new CartData();
+									$tP = $cartDataObj->totalCartData();
+									if($tP){
+										while($tPro = $tP->fetch_assoc()){
+											echo $tPro['tProduct'];
+										}
+									}
+									?>
+								</span>
 							</a>
 						</div>
 			      </div>

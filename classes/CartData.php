@@ -80,6 +80,13 @@ class CartData
 			$checkRes  = $this->db->select($session_id_query);
 			return $checkRes;
 		}
+
+		public function totalCartData(){
+			$sId = session_id();
+			$query = "SELECT SUM(quantity) as tProduct FROM tbl_cart WHERE sId = '$sId' ";
+			$tPro  = $this->db->select($query);
+			return $tPro;
+		}
 }
 
 ?>

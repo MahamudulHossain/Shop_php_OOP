@@ -35,6 +35,7 @@
 
 			    		if(isset($updateItemNumber)){
 			    			echo $updateItemNumber;
+			    			echo "<script>window.location.href='cart.php'</script>";
 			    		}
 			    	?>
 			    	</div>
@@ -77,7 +78,7 @@
 								<td><a onclick="return confirm('Are you sure?');" href="?delCartItem=<?php echo $cartRow['cartId']?>">X</a></td>
 							</tr>
 							<?php 
-								$sum+=$tp;
+								$sum+= $tp;
 									}
 									 } 
 							?>
