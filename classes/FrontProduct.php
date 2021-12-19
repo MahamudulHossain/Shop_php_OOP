@@ -60,7 +60,19 @@
 			return $result;
 		}
 
-		
+		public function getAllCatName(){
+			$query = "SELECT * FROM tbl_category ORDER BY catId DESC ";
+			$result = $this->db->select($query);
+			return $result;
+		}
+
+		public function productByCategory($id){
+			$id = $this->fm->validation($id);
+			$id = mysqli_real_escape_string($this->db->link,$id);
+			$query = "SELECT * FROM tbl_product WHERE catId = '$id' ORDER BY productId DESC ";
+			$result = $this->db->select($query);
+			return $result;
+		}
 
 	}	
 
