@@ -36,6 +36,32 @@
 
 		} 
 
+		public function productIphone(){
+			$query = "SELECT * FROM tbl_product WHERE brandId = '4' ORDER BY productId DESC LIMIT 1";
+			$result = $this->db->select($query);
+			return $result;
+		}
+
+		public function productSamsung(){
+			$query = "SELECT * FROM tbl_product WHERE brandId = '2' ORDER BY productId DESC LIMIT 1";
+			$result = $this->db->select($query);
+			return $result;
+		}
+
+		public function productAcer(){
+			$query = "SELECT * FROM tbl_product WHERE brandId = '5' ORDER BY productId DESC LIMIT 1";
+			$result = $this->db->select($query);
+			return $result;
+		}
+
+		public function productCanon(){
+			$query = "SELECT * FROM tbl_product WHERE brandId = '3' ORDER BY productId DESC LIMIT 1";
+			$result = $this->db->select($query);
+			return $result;
+		}
+
+		
+
 	}	
 
 ?>		
