@@ -36,7 +36,24 @@ class Registration{
 				}
 			}
 			return $Msg;
-			
+		}
+
+		public function userLogin($data){
+			$email =  mysqli_real_escape_string($this->db->link,$data['email']);
+			$password =  mysqli_real_escape_string($this->db->link,md5($data['password']));
+			$query = "SELECT * FROM tbl_user WHERE email='$email' AND password='$password' ";
+			$selected_rows = $this->db->select($query);
+			    if($selected_rows){
+			    	$res = $selected_rows->fetch_assoc();
+			    	Session::set('cusLogin', true);
+			    	Session::set('cusId', $res['userId ']);
+			    	Session::set('cusName', $res['name']);
+					header('location:order.php');
+				}else{
+					$Msg = "<span style='color:red; font-size:18px; font-weight:bold;'>Please insert valid login credentials<span>";
+					return $Msg;
+				}
+
 		}
 }
 ?>
