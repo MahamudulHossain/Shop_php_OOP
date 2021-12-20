@@ -4,6 +4,8 @@
     include 'lib/Session.php';
     include 'classes/FrontProduct.php';
     include 'classes/CartData.php';
+    include 'classes/Registration.php';
+    
     Session::init();
 	  header("Cache-Control: no-cache, must-revalidate");
 	  header("Pragma: no-cache"); 
