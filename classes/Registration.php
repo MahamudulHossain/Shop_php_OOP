@@ -46,7 +46,7 @@ class Registration{
 			    if($selected_rows){
 			    	$res = $selected_rows->fetch_assoc();
 			    	Session::set('cusLogin', true);
-			    	Session::set('cusId', $res['userId ']);
+			    	Session::set('cusId', $res['userId']);
 			    	Session::set('cusName', $res['name']);
 					header('location:order.php');
 				}else{

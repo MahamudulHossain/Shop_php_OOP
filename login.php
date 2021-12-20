@@ -1,4 +1,11 @@
-<?php include 'inc/header.php'; ?>
+<?php 
+	include 'inc/header.php'; 
+	$loginInfo = Session::get('cusLogin');
+	if($loginInfo){
+		header('location:index.php');
+	}
+
+?>
 <?php
 
 	$regObj = new Registration();

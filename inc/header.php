@@ -5,7 +5,7 @@
     include 'classes/FrontProduct.php';
     include 'classes/CartData.php';
     include 'classes/Registration.php';
-    
+
     Session::init();
 	  header("Cache-Control: no-cache, must-revalidate");
 	  header("Pragma: no-cache"); 
@@ -17,6 +17,10 @@
 		// 	include_once "classes/". $class . ".php";
 		// 	}); 
 
+	  //Logout
+	  if(isset($_GET['cid']) && $_GET['cid'] != null){
+	  	Session::destroy();
+	  }
 ?>
 
 <!DOCTYPE HTML>
@@ -71,7 +75,17 @@
 							</a>
 						</div>
 			      </div>
-		   <div class="login"><a href="login.php">Login</a></div>
+		   <div class="login">
+		   	<?php 
+		   		$loginInfo = Session::get('cusLogin');
+				if($loginInfo){ ?>
+					<a href="?cid=<?php echo Session::get('cusId')?>">Logout</a>
+
+				<?php }else{ ?>
+					<a href='login.php'>Login</a>
+				<?php } ?>
+		   	
+		   </div>
 		 <div class="clear"></div>
 	 </div>
 	 <div class="clear"></div>
