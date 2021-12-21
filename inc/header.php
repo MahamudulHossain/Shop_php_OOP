@@ -105,6 +105,7 @@
 	  	if($cartDataChk){
 	  ?>
 	  	<li><a href="cart.php">Cart</a></li>
+	  	<li><a href="order.php">Order Now</a> </li>
 	 <?php } ?>
 
 	 <?php 

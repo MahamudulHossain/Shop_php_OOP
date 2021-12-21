@@ -18,7 +18,7 @@
     	}
 ?>
 <style type="text/css">
-	.proTbl{width:650px;}
+	.proTbl{width:650px; margin:auto;}
 	.proTbl tr th{font-weight: bold;width: 20%; border-right: 2px solid #afa5a5;}
 </style>
  <div class="main">

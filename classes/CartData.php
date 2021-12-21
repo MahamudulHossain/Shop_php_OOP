@@ -35,8 +35,7 @@ class CartData
 			    if($inserted_rows){
 					header("Location:cart.php");
 				}else{
-					header("Location:404.php");
-					
+					header("Location:404.php");	
 				}
 			}
 			
@@ -86,6 +85,33 @@ class CartData
 			$query = "SELECT SUM(quantity) as tProduct FROM tbl_cart WHERE sId = '$sId' ";
 			$tPro  = $this->db->select($query);
 			return $tPro;
+		}
+
+		public function paymentTypeCod($cmrId){
+			$sId = session_id();
+			$cartDataquery = "SELECT * FROM tbl_cart WHERE sId = '$sId' ";
+			$allData  = $this->db->select($cartDataquery);
+			if($allData){
+				while($res = $allData->fetch_assoc()){
+					$productId = $res['productId'];
+					$productName = $res['productName'];
+					$quantity = $res['quantity'];
+					$price = $res['price'];
+					$image = $res['image'];
+
+				$query = "INSERT INTO tbl_order(cmrId,productId,productName,quantity,price,image) VALUES('$cmrId','$productId','$productName','$quantity','$price','$image')";
+				$inserted_rows = $this->db->insert($query);
+			    if($inserted_rows){
+					header("Location:success.php");
+				}
+			  }
+			}
+		}
+
+		public function daleteCartData(){
+			$sId = session_id();
+			$query = "DELETE FROM tbl_cart WHERE sId = '$sId' ";
+			$result = $this->db->delete($query);
 		}
 }
 
