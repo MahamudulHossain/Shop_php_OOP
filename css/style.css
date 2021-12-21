@@ -165,11 +165,11 @@ input[type="number"] {
   color: #444;
   display: block;
   float: left;
-  font-size: 27px;
+  font-size: 25px;
   height: 38px;
   margin-left: 10px;
   text-align: center;
-  width: 144px;
+  width: 130px;
 }
 .login a {
 	color:#333;

@@ -48,12 +48,32 @@ class Registration{
 			    	Session::set('cusLogin', true);
 			    	Session::set('cusId', $res['userId']);
 			    	Session::set('cusName', $res['name']);
-					header('location:order.php');
+					header('location:profile.php');
 				}else{
 					$Msg = "<span style='color:red; font-size:18px; font-weight:bold;'>Please insert valid login credentials<span>";
 					return $Msg;
 				}
+		}
 
+		public function getUserInfo($id){
+			$query = "SELECT * FROM tbl_user WHERE  userId='$id' ";
+			$selected_rows = $this->db->select($query);
+		    return $selected_rows;
+		}
+
+		public function updateProfile($data,$id){
+			$name =  mysqli_real_escape_string($this->db->link,$data['name']);
+			$email =  mysqli_real_escape_string($this->db->link,$data['email']);
+			$address =  mysqli_real_escape_string($this->db->link,$data['address']);
+			$phone =  mysqli_real_escape_string($this->db->link,$data['phone']);
+			$zip =  mysqli_real_escape_string($this->db->link,$data['zip']);
+			
+			$query = "UPDATE  tbl_user SET name = '$name',email = '$email',address = '$address',phone = '$phone',zip = '$zip' WHERE userId = '$id' ";
+
+		    $updated_rows = $this->db->update($query);
+			    if($updated_rows){
+					header('Location:profile.php');
+				}
 		}
 }
 ?>

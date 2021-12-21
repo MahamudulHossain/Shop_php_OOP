@@ -37,6 +37,10 @@
 <script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script> 
 <script type="text/javascript" src="js/nav-hover.js"></script>
+
+ <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 <link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
 <script type="text/javascript">
@@ -95,7 +99,21 @@
 	  <li><a href="index.php">Home</a></li>
 	  <li><a href="products.php">Products</a> </li>
 	  <li><a href="topbrands.php">Top Brands</a></li>
-	  <li><a href="cart.php">Cart</a></li>
+	  <?php 
+	  	$cartObj = new CartData();
+	  	$cartDataChk = $cartObj->cartAllData();
+	  	if($cartDataChk){
+	  ?>
+	  	<li><a href="cart.php">Cart</a></li>
+	 <?php } ?>
+
+	 <?php 
+	  	$userLoginCkh = Session::get('cusId');
+	  	if($userLoginCkh){
+	  ?>
+	  	<li><a href="profile.php">Profile</a> </li>
+	  <?php } ?>
+
 	  <li><a href="contact.php">Contact</a> </li>
 	  <div class="clear"></div>
 	</ul>
