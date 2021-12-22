@@ -119,6 +119,15 @@ class CartData
 			$result = $this->db->select($query);
 			return $result;
 		}
+
+		public function orderedAllData($cmrId){
+			$query = "SELECT * FROM tbl_order WHERE cmrId='$cmrId' ORDER BY id DESC";
+			$result = $this->db->select($query);
+			return $result;
+		}
+
+
+
 }
 
 ?>
