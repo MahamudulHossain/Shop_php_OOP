@@ -10,6 +10,12 @@
 	if(!$sessionRes){
 		echo "<script>window.location.href = 'index.php'</script>";
 	}
+	//checking user logged in or not
+	$loginChk = Session::get('cusLogin');
+	if($loginChk != true){
+		echo "<script>window.location.href = 'login.php'</script>";
+	}
+
 ?>
 <?php
 	if(isset($_GET['payType']) && $_GET['payType'] == 'cod'){

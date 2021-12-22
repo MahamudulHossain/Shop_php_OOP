@@ -96,7 +96,7 @@ class CartData
 					$productId = $res['productId'];
 					$productName = $res['productName'];
 					$quantity = $res['quantity'];
-					$price = $res['price'];
+					$price = $res['price'] * $quantity;
 					$image = $res['image'];
 
 				$query = "INSERT INTO tbl_order(cmrId,productId,productName,quantity,price,image) VALUES('$cmrId','$productId','$productName','$quantity','$price','$image')";
@@ -112,6 +112,12 @@ class CartData
 			$sId = session_id();
 			$query = "DELETE FROM tbl_cart WHERE sId = '$sId' ";
 			$result = $this->db->delete($query);
+		}
+
+		public function payableAmount($cmrId){
+			$query = "SELECT price FROM tbl_order WHERE cmrId='$cmrId' AND odate=now() ";
+			$result = $this->db->select($query);
+			return $result;
 		}
 }
 
