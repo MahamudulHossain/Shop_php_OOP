@@ -126,6 +126,12 @@ class CartData
 			return $result;
 		}
 
+		public function orderDataCheck($cmrId){
+			$query = "SELECT * FROM tbl_order WHERE cmrId = '$cmrId' ";
+			$allData  = $this->db->select($query);
+			return $allData;
+		}
+
 
 
 }

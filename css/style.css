@@ -169,10 +169,11 @@ input[type="number"] {
   height: 38px;
   margin-left: 10px;
   text-align: center;
-  width: 130px;
+  width: 120px;
 }
 .login a {
 	color:#333;
+	text-decoration: none;
 }
 /*** Login ***/
 .register_account h3,.login_panel h3{

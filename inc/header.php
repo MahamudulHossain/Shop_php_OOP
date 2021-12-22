@@ -105,8 +105,17 @@
 	  	if($cartDataChk){
 	  ?>
 	  	<li><a href="cart.php">Cart</a></li>
-	  	<li><a href="order.php">Order Now</a> </li>
 	 <?php } ?>
+
+	 <?php 
+	  	$cmrId = Session::get('cusId');
+	  	if($cmrId){
+	  		$cartObj = new CartData();
+		  	$orderDataChk = $cartObj->orderDataCheck($cmrId);
+		  	if($orderDataChk){
+	  ?>
+	  	<li><a href="orderDetails.php">Order Details</a> </li>
+	  <?php } } ?>
 
 	 <?php 
 	  	$userLoginCkh = Session::get('cusId');
