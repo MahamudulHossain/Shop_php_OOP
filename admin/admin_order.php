@@ -14,7 +14,6 @@
 							<th>Serial No.</th>
 							<th>Customar Details</th>
 							<th>Order Details</th>
-							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -36,15 +35,27 @@
 											$uDate =  $resu['odate'];
 											$allData = $adOrObj->allDate($id,$uDate);
 											if($allData){
-												echo "<table><tr><th>Name</th><th>Quantity</th><th>Price</th></tr>";
-												while($resul = $allData->fetch_assoc()){
-													echo "<tr>";
+													$sum=0;
+													$rowCount = 1;
+												?>
+												<table style="border:1px solid black;"><tr style="border:1px solid black;"><th>Name</th><th>Quantity</th><th>Price</th></tr>
+													<?php
+												while($resul = $allData->fetch_assoc()){?>
+													<tr style="border:1px solid black;">
+														<?php
 													echo "<td>".$resul['productName']."</td>";
 													echo "<td>".$resul['quantity']."</td>";
-													echo "<td>".$resul['price']."</td>";
-													echo "<tr>";
+													echo "<td> $".$resul['price']."</td>";
+													$sum += $resul['price'];
+													$rowCount++;
+													?>
+													<tr style="border:1px solid black;">
+														<?php
+												}?>
+												<?php
+												$sum = $sum + $sum * 0.1;
+												echo "Final Amount to Pay: $".$sum;
 
-												}
 												echo "</table>";
 											}
 										}
@@ -52,7 +63,6 @@
 
 								?>
 							</td>
-							<td><a href="">Edit</a> || <a href="">Delete</a></td>
 						</tr>
 					<?php } } ?>
 					</tbody>
